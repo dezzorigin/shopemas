@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPin,
-  Phone,
   MessageCircle,
   Crown,
   Sparkles,
@@ -29,6 +28,12 @@ import { CATALOG_DATA } from "@/data/catalog";
 const WA_NUMBER = "6281279939946";
 const MAYAM_PER_GRAM = 3.33;
 
+// HARGA ACUAN — BUKAN harga live. Angka di bawah ini konstanta yang
+// diperbarui manual oleh pengelola toko; tidak ada API harga emas yang
+// dipanggil. Selalu tampilkan tanggal acuannya (PRICE_AS_OF) dan arahkan
+// pembeli konfirmasi harga transaksi via WhatsApp.
+const PRICE_AS_OF = "18 November 2026";
+
 const GOLD_PRICES = [
   { kadar: "Emas 24K / 99%", hargaGram: 1950000, highlight: true },
   { kadar: "Emas 23K", hargaGram: 1890000, highlight: false },
@@ -37,6 +42,10 @@ const GOLD_PRICES = [
   { kadar: "LM Antam 999.9", hargaGram: 1980000, highlight: false },
 ];
 
+// TESTIMONI CONTOH — nama & isi di bawah ini contoh ilustratif dari
+// pembangun awal situs, BUKAN ulasan terverifikasi dari Google/WhatsApp.
+// Jangan diklaim sebagai ulasan asli sampai diganti dengan testimoni
+// pelanggan sungguhan. Lihat README § Batasan.
 const TESTIMONIALS = [
   {
     name: "Rahmi Saputri",
@@ -149,6 +158,19 @@ function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {/* GitHub — kode sumber situs ini (open source) */}
+          <a
+            id="header-github-btn"
+            href="https://github.com/dezzorigin/shopemas"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Lihat kode sumber di GitHub"
+            className="w-9 h-9 rounded-full border border-[#E8D5B0] flex items-center justify-center text-[#6B4433] hover:text-[#8B1A1A] hover:border-[#8B1A1A] transition-colors"
+          >
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+            </svg>
+          </a>
           {/* Instagram icon */}
           <a
             id="header-ig-btn"
@@ -217,7 +239,9 @@ function Hero() {
       />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 lg:py-24 relative">
-        <div className="text-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 items-center">
+          {/* Kiri: teks */}
+          <div className="text-center lg:text-left">
           {/* Location badge */}
           <motion.div
             initial={{ opacity: 0, y: -8 }}
@@ -246,7 +270,7 @@ function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.55, delay: 0.2 }}
-            className="text-[#6B4433] text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed"
+            className="text-[#6B4433] text-base sm:text-lg max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed"
           >
             Melayani jual beli emas murni, logam mulia Antam, perhiasan mahar
             nikah custom, dan tindik telinga steril — dengan transparansi penuh
@@ -258,7 +282,7 @@ function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-3 mb-14"
+            className="flex flex-wrap justify-center lg:justify-start gap-3 mb-14 lg:mb-0"
           >
             <button
               id="hero-catalog-btn"
@@ -284,28 +308,62 @@ function Hero() {
             </button>
           </motion.div>
 
-          {/* Stats row */}
+          </div>
+
+          {/* Kanan: foto produk */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-[#E8D5B0] pt-10"
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="relative mx-auto w-full max-w-md lg:max-w-none"
           >
-            {[
-              { val: "15+", label: "Tahun Berpengalaman" },
-              { val: "99%", label: "Kemurnian Emas" },
-              { val: "1.000+", label: "Pelanggan Puas" },
-              { val: "09–17.30", label: "Buka Setiap Hari" },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <p className="font-playfair text-2xl sm:text-3xl font-bold text-[#8B1A1A]">
-                  {s.val}
-                </p>
-                <p className="text-xs sm:text-sm text-[#6B4433] mt-1">{s.label}</p>
+            <div className="rounded-[2rem] overflow-hidden border border-[#E8D5B0] shadow-xl">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/hero.png"
+                alt="Perhiasan emas Mulia Raya — cincin, anting, dan kalung di atas beludru marun"
+                className="w-full h-auto object-cover aspect-square"
+              />
+            </div>
+            {/* Chip harga acuan */}
+            <div className="absolute -bottom-5 left-5 right-5 sm:left-8 sm:right-auto bg-[#2C0A0A] rounded-2xl px-5 py-4 shadow-lg flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-[#C47F00]/20 flex items-center justify-center shrink-0">
+                <TrendingUp className="w-5 h-5 text-[#E8C66A]" />
               </div>
-            ))}
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#C8A87A]">
+                  Emas 24K / 99% · Harga Acuan
+                </p>
+                <p className="font-playfair text-lg font-bold text-[#E8C66A] leading-tight">
+                  {formatRupiah(Math.round(GOLD_PRICES[0].hargaGram * MAYAM_PER_GRAM))} / Mayam
+                </p>
+                <p className="text-[10px] text-[#C8A87A]">per {PRICE_AS_OF} — konfirmasi via WA</p>
+              </div>
+            </div>
           </motion.div>
         </div>
+
+        {/* Stats row */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-[#E8D5B0] pt-10 mt-16"
+        >
+          {[
+            { val: "15+", label: "Tahun Berpengalaman" },
+            { val: "99%", label: "Kemurnian Emas" },
+            { val: "1.000+", label: "Pelanggan Puas" },
+            { val: "09–17.30", label: "Buka Setiap Hari" },
+          ].map((s) => (
+            <div key={s.label} className="text-center">
+              <p className="font-playfair text-2xl sm:text-3xl font-bold text-[#8B1A1A]">
+                {s.val}
+              </p>
+              <p className="text-xs sm:text-sm text-[#6B4433] mt-1">{s.label}</p>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
@@ -316,20 +374,6 @@ function Hero() {
 function HargaEmas() {
   const [calcKadar, setCalcKadar] = useState(GOLD_PRICES[0].kadar);
   const [calcMayam, setCalcMayam] = useState("");
-  const [timestamp, setTimestamp] = useState("");
-
-  // Fix hydration: only compute time on client
-  React.useEffect(() => {
-    setTimestamp(
-      new Date().toLocaleString("id-ID", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      })
-    );
-  }, []);
 
   const pricePerGram =
     GOLD_PRICES.find((p) => p.kadar === calcKadar)?.hargaGram ?? 0;
@@ -350,7 +394,7 @@ function HargaEmas() {
           </h2>
           <p className="text-[#6B4433] text-sm flex items-center justify-center gap-1.5">
             <Clock className="w-3.5 h-3.5" />
-            Update: {timestamp} WIB
+            Harga acuan per {PRICE_AS_OF} — bukan harga live
           </p>
         </div>
 
@@ -408,7 +452,9 @@ function HargaEmas() {
               </tbody>
             </table>
             <p className="text-[11px] text-[#8B5033] px-5 py-3 bg-[#FAF5F0] border-t border-[#E8D5B0]">
-              *Harga estimasi. Hubungi admin untuk harga transaksi aktual.
+              *Harga acuan per {PRICE_AS_OF}, diperbarui manual oleh toko — bukan
+              harga live. Harga transaksi aktual bisa berubah mengikuti pasar;
+              konfirmasi via WhatsApp sebelum datang.
             </p>
           </div>
 
@@ -717,8 +763,8 @@ function TentangKami() {
               return (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                   className="flex gap-4 bg-white/6 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors"
@@ -1002,7 +1048,7 @@ function Testimoni() {
                 </div>
               </div>
               <p className="text-[#6B4433] text-sm leading-relaxed">
-                "{t.text}"
+                &ldquo;{t.text}&rdquo;
               </p>
               <p className="text-[11px] text-[#C47F00] font-medium mt-3">
                 via {t.via}
@@ -1288,9 +1334,19 @@ function Footer() {
             &copy; {new Date().getFullYear()} Toko Emas Mulia Raya. Semua hak
             cipta dilindungi.
           </p>
-          <div className="flex items-center gap-1.5 text-[#4A2020] text-xs">
-            <CheckCircle className="w-3.5 h-3.5 text-[#C47F00]" />
-            Emas Asli · Harga Transparan · Terpercaya
+          <div className="flex items-center gap-4">
+            <a
+              href="https://github.com/dezzorigin/shopemas"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#4A2020] hover:text-[#C47F00] text-xs transition-colors"
+            >
+              Kode sumber di GitHub
+            </a>
+            <div className="flex items-center gap-1.5 text-[#4A2020] text-xs">
+              <CheckCircle className="w-3.5 h-3.5 text-[#C47F00]" />
+              Emas Asli · Harga Transparan · Terpercaya
+            </div>
           </div>
         </div>
       </div>

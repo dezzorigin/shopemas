@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Shopemas — Diagram Arsitektur v1.1.0</title>
+<style>
+  body { margin: 0; background: #FAF5F0; font-family: Georgia, serif; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 26px; color: #2C0A0A; margin: 0 0 4px; }
+  p.sub { color: #6B4433; font-size: 14px; margin: 0 0 24px; font-family: system-ui, sans-serif; }
+  svg { width: 100%; height: auto; display: block; }
+  .note { margin-top: 20px; font-family: system-ui, sans-serif; font-size: 13px; color: #6B4433; line-height: 1.6; }
+  .note b { color: #2C0A0A; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Shopemas — Alur Situs &amp; Data</h1>
+  <p class="sub">Toko Emas Mulia Raya · v1.1.0 · situs statis, tanpa backend — semua aksi keluar ke WhatsApp</p>
+  <svg viewBox="0 0 920 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram arsitektur Shopemas">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0L10 5L0 10z" fill="#8B1A1A"/>
+      </marker>
+    </defs>
+
+    <!-- Pengunjung -->
+    <g>
+      <rect x="20" y="30" width="170" height="86" rx="14" fill="#2C0A0A"/>
+      <text x="105" y="66" text-anchor="middle" fill="#E8C66A" font-size="15" font-weight="bold">Pengunjung</text>
+      <text x="105" y="90" text-anchor="middle" fill="#C8A87A" font-size="12">HP / desktop</text>
+    </g>
+
+    <!-- Cloudflare Pages -->
+    <g>
+      <rect x="330" y="30" width="220" height="86" rx="14" fill="#C47F00"/>
+      <text x="440" y="66" text-anchor="middle" fill="#fff" font-size="15" font-weight="bold">Cloudflare Pages</text>
+      <text x="440" y="90" text-anchor="middle" fill="#FFF3D6" font-size="12">shopemas.pages.dev</text>
+    </g>
+
+    <!-- out/index.html -->
+    <g>
+      <rect x="660" y="30" width="240" height="86" rx="14" fill="#fff" stroke="#E8D5B0" stroke-width="2"/>
+      <text x="780" y="66" text-anchor="middle" fill="#2C0A0A" font-size="15" font-weight="bold">out/index.html</text>
+      <text x="780" y="90" text-anchor="middle" fill="#6B4433" font-size="12">prerender saat build</text>
+    </g>
+
+    <!-- Arrows top row -->
+    <line x1="190" y1="73" x2="325" y2="73" stroke="#8B1A1A" stroke-width="2" marker-end="url(#arr)"/>
+    <line x1="550" y1="73" x2="655" y2="73" stroke="#8B1A1A" stroke-width="2" marker-end="url(#arr)"/>
+
+    <!-- Sections box -->
+    <g>
+      <rect x="660" y="170" width="240" height="220" rx="14" fill="#F5EBE0" stroke="#E8D5B0" stroke-width="2"/>
+      <text x="780" y="200" text-anchor="middle" fill="#8B1A1A" font-size="13" font-weight="bold">SEKSI HALAMAN</text>
+      <text x="780" y="226" text-anchor="middle" fill="#2C0A0A" font-size="13">Hero · Harga Emas</text>
+      <text x="780" y="250" text-anchor="middle" fill="#2C0A0A" font-size="13">Katalog · Tentang</text>
+      <text x="780" y="274" text-anchor="middle" fill="#2C0A0A" font-size="13">Layanan · Testimoni</text>
+      <text x="780" y="298" text-anchor="middle" fill="#2C0A0A" font-size="13">FAQ · Kontak · Footer</text>
+      <text x="780" y="330" text-anchor="middle" fill="#6B4433" font-size="12">+ tombol WA melayang</text>
+      <text x="780" y="362" text-anchor="middle" fill="#6B4433" font-size="12">src/app/page.tsx</text>
+    </g>
+    <line x1="780" y1="116" x2="780" y2="165" stroke="#8B1A1A" stroke-width="2" marker-end="url(#arr)"/>
+
+    <!-- Data box -->
+    <g>
+      <rect x="330" y="170" width="220" height="220" rx="14" fill="#fff" stroke="#C47F00" stroke-width="2"/>
+      <text x="440" y="200" text-anchor="middle" fill="#C47F00" font-size="13" font-weight="bold">DATA (KONSTANTA)</text>
+      <text x="440" y="226" text-anchor="middle" fill="#2C0A0A" font-size="13">GOLD_PRICES · 5 kadar</text>
+      <text x="440" y="250" text-anchor="middle" fill="#2C0A0A" font-size="13">PRICE_AS_OF · 18 Nov 2026</text>
+      <text x="440" y="274" text-anchor="middle" fill="#2C0A0A" font-size="13">CATALOG_DATA · 18 produk</text>
+      <text x="440" y="298" text-anchor="middle" fill="#2C0A0A" font-size="13">WA_NUMBER · 6281279939946</text>
+      <text x="440" y="330" text-anchor="middle" fill="#6B4433" font-size="12">manual — bukan API live</text>
+      <text x="440" y="362" text-anchor="middle" fill="#6B4433" font-size="12">page.tsx + data/catalog.ts</text>
+    </g>
+    <line x1="655" y1="280" x2="555" y2="280" stroke="#8B1A1A" stroke-width="2" marker-end="url(#arr)"/>
+
+    <!-- Aset -->
+    <g>
+      <rect x="20" y="170" width="170" height="220" rx="14" fill="#fff" stroke="#E8D5B0" stroke-width="2"/>
+      <text x="105" y="200" text-anchor="middle" fill="#8B1A1A" font-size="13" font-weight="bold">ASET</text>
+      <text x="105" y="226" text-anchor="middle" fill="#2C0A0A" font-size="13">hero.png (lokal)</text>
+      <text x="105" y="250" text-anchor="middle" fill="#2C0A0A" font-size="13">foto katalog:</text>
+      <text x="105" y="274" text-anchor="middle" fill="#2C0A0A" font-size="13">Unsplash (hotlink)</text>
+      <text x="105" y="298" text-anchor="middle" fill="#2C0A0A" font-size="13">peta: Google Maps</text>
+      <text x="105" y="322" text-anchor="middle" fill="#2C0A0A" font-size="13">embed (iframe)</text>
+    </g>
+    <line x1="325" y1="280" x2="195" y2="280" stroke="#8B1A1A" stroke-width="2" marker-end="url(#arr)"/>
+
+    <!-- WhatsApp -->
+    <g>
+      <rect x="330" y="440" width="220" height="86" rx="14" fill="#25D366"/>
+      <text x="440" y="476" text-anchor="middle" fill="#fff" font-size="15" font-weight="bold">WhatsApp Admin</text>
+      <text x="440" y="500" text-anchor="middle" fill="#E9FFF1" font-size="12">wa.me/6281279939946</text>
+    </g>
+    <line x1="780" y1="390" x2="780" y2="440" stroke="#25D366" stroke-width="2" marker-end="url(#arr)" transform="rotate(0)"/>
+    <path d="M 780 390 L 780 415 L 550 415 L 550 440" fill="none" stroke="#25D366" stroke-width="2" marker-end="url(#arr)"/>
+
+    <!-- CI -->
+    <g>
+      <rect x="660" y="440" width="240" height="86" rx="14" fill="#2C0A0A"/>
+      <text x="780" y="476" text-anchor="middle" fill="#E8C66A" font-size="15" font-weight="bold">CI · GitHub Actions</text>
+      <text x="780" y="500" text-anchor="middle" fill="#C8A87A" font-size="12">typecheck → lint → build → smoke</text>
+    </g>
+  </svg>
+  <div class="note">
+    <b>Cara baca:</b> pengunjung membuka <b>shopemas.pages.dev</b> → halaman statis hasil build
+    menampilkan seksi &amp; data konstanta. Tidak ada server: klik produk, kalkulator, dan semua tombol
+    chat hanya membuka <b>WhatsApp admin</b> dengan pesan terisi otomatis. Harga emas adalah
+    <b> konstanta manual</b> (bukan API live) — tanggal acuannya selalu tampil di halaman.
+  </div>
+</div>
+</body>
+</html>
