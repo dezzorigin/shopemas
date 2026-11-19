@@ -1,5 +1,22 @@
 # CHANGELOG — Shopemas
 
+## v1.1.1 — 19 November 2026 (PR #2, belum merge)
+
+Retrofit link preview (Open Graph + Twitter Card) — perintah 19 Nov 2026:
+link ditempel di WhatsApp tampil polos karena `og:image` menunjuk
+`http://localhost:3000/hero.png` (metadataBase tidak diset) dan tidak ada
+`og:url`.
+
+### Diubah
+- `src/app/layout.tsx`: `metadataBase` + `og:url` absolut
+  (`https://shopemas.pages.dev`); `og:image`/`twitter:image` kini
+  `https://shopemas.pages.dev/og-image.png` (1200x630); `twitter:card`
+  `summary_large_image` eksplisit.
+- `public/og-image.png`: screenshot asli hero situs (build lokal,
+  1200x630) — bukan gambar karangan.
+- `scripts/smoke.mjs`: cek `out/og-image.png` + marker `og:url`,
+  `og:image`, `twitter:card` di hasil build.
+
 ## v1.1.0 — 18 November 2026 (PR #1)
 
 Rebuild "proper" pertama: situs sudah jalan, fokus ke kejujuran, landing,

@@ -14,6 +14,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://shopemas.pages.dev"),
   title: "Toko Emas Mulia Raya | Pusat Perhiasan Emas & Logam Mulia Banda Aceh",
   description: "Melayani Jual Beli Emas, Logam Mulia Antam, Mahar Nikah Khas Aceh, dan Layanan Tindik Telinga Steril Sejak Pasar Aceh.",
   openGraph: {
@@ -22,7 +23,15 @@ export const metadata: Metadata = {
       "Pusat perhiasan emas 99% & logam mulia Antam terpercaya di Pasar Aceh. Cek harga emas per mayam, lihat katalog, chat admin via WhatsApp.",
     type: "website",
     locale: "id_ID",
-    images: [{ url: "/hero.png", width: 1024, height: 1024, alt: "Perhiasan emas Mulia Raya" }],
+    url: "https://shopemas.pages.dev",
+    images: [{ url: "https://shopemas.pages.dev/og-image.png", width: 1200, height: 630, alt: "Toko Emas Mulia Raya — showroom digital & katalog perhiasan emas Banda Aceh" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Toko Emas Mulia Raya — Banda Aceh",
+    description:
+      "Pusat perhiasan emas 99% & logam mulia Antam terpercaya di Pasar Aceh. Cek harga emas per mayam, lihat katalog, chat admin via WhatsApp.",
+    images: ["https://shopemas.pages.dev/og-image.png"],
   },
 };
 

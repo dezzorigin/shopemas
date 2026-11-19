@@ -22,7 +22,7 @@ Showroom digital & katalog perhiasan **Toko Emas Mulia Raya** (Jl. Tgk. Chik Pan
 | Testimoni | Ringkasan rating + 3 kartu testimoni (lihat § Batasan) |
 | FAQ | 5 pertanyaan umum (akordeon) |
 | Kontak | Kartu WhatsApp / lokasi / jam + peta Google Maps + CTA chat |
-| Lainnya | Tombol WhatsApp melayang, JSON-LD `JewelryStore`, OpenGraph |
+| Lainnya | Tombol WhatsApp melayang, JSON-LD `JewelryStore`, OpenGraph + Twitter Card (`public/og-image.png` = screenshot asli hero, 1200x630) |
 
 ## Video demo
 
