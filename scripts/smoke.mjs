@@ -16,6 +16,7 @@ function check(name, ok) {
 
 check("out/index.html exists", existsSync(htmlPath));
 check("out/hero.png exists", existsSync(join(outDir, "hero.png")));
+check("out/og-image.png exists", existsSync(join(outDir, "og-image.png")));
 check("out/_next/ exists", existsSync(join(outDir, "_next")));
 
 const html = existsSync(htmlPath)
@@ -37,6 +38,9 @@ const markers = [
   ["contact", "Siap Melayani Anda"],
   ["github link", "github.com/dezzorigin/shopemas"],
   ["JSON-LD JewelryStore", "JewelryStore"],
+  ["og:url", "https://shopemas.pages.dev"],
+  ["og:image absolut", "https://shopemas.pages.dev/og-image.png"],
+  ["twitter:card", "summary_large_image"],
 ];
 // WA number lives only in client JS (click handlers), not prerendered HTML.
 import { readdirSync } from "node:fs";
